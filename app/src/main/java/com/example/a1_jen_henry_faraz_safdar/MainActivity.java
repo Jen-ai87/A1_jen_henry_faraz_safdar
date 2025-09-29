@@ -31,5 +31,10 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        etHours = findViewById(R.id.etHours);
+        etRate = findViewById(R.id.etRate);
+        btnCalculate = findViewById(R.id.btnCalculate);
+        tvResults = findViewById(R.id.tvResults);
+
     }
 }
