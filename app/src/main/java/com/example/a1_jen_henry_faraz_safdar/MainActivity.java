@@ -1,6 +1,7 @@
 package com.example.a1_jen_henry_faraz_safdar;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -36,5 +37,14 @@ public class MainActivity extends AppCompatActivity {
         btnCalculate = findViewById(R.id.btnCalculate);
         tvResults = findViewById(R.id.tvResults);
 
+        btnCalculate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calculatePay();
+            }
+        });
+
     }
+
+    private void calculatePay() {}
 }
