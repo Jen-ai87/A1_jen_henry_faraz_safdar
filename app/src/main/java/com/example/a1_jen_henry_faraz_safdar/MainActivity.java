@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,5 +47,53 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void calculatePay() {}
+    private void calculatePay() {
+        String hoursStr = etHours.getText().toString();
+        String rateStr = etRate.getText().toString();
+
+        if (hoursStr.isEmpty() || rateStr.isEmpty()) {
+            Toast.makeText(this, "Please enter both hours and rate", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        try {
+            double hours = Double.parseDouble(hoursStr);
+            double rate = Double.parseDouble(rateStr);
+
+            if (hours < 0 || rate < 0) {
+                Toast.makeText(this, "Please enter positive values", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            double regularPay, overtimePay, totalPay, tax;
+
+            if (hours <= 40) {
+                regularPay = hours * rate;
+                overtimePay = 0;
+            } else {
+                regularPay = 40 * rate;
+                overtimePay = (hours - 40) * rate * 1.5;
+            }
+
+            totalPay = regularPay + overtimePay;
+            tax = totalPay * 0.18;
+
+            String results = "Regular Pay: $" + df.format(regularPay) + "\n" +
+                    "Overtime Pay: $" + df.format(overtimePay) + "\n" +
+                    "Total Pay: $" + df.format(totalPay) + "\n" +
+                    "Tax: $" + df.format(tax);
+
+            tvResults.setText(results);
+
+            // Add to payment list
+            String paymentEntry = "Hours: " + hours + ", Rate: $" + rate +
+                    ", Total: $" + df.format(totalPay);
+            paymentList.add(paymentEntry);
+
+            Toast.makeText(this, "Payment calculated successfully!", Toast.LENGTH_SHORT).show();
+
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Please enter valid numbers", Toast.LENGTH_SHORT).show();
+        }
+    }
 }
