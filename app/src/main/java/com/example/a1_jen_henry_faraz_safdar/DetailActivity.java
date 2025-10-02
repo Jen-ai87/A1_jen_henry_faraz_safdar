@@ -1,4 +1,4 @@
-package com.example.a1_jen_faraz;
+package com.example.a1_jen_henry_faraz_safdar;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
